@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
+import menuItems from '../../menu-data'
 import Header from '../Header'
 import Gallery from '../Gallery'
 import Menu from '../Menu'
+import MenuEdit from '../MenuEdit'
 
 class Page extends Component {
   constructor(props) {
     super(props)
     this.state = {
       signedIn: false,
+      editMode: false,
+      menuItems: menuItems,
     }
   }
 
@@ -24,10 +28,42 @@ class Page extends Component {
   }
 
   handleEditMenuClick = () => {
-
+    this.setState({
+      editMode: true
+    })
   }
 
+  handleEditMenuDoneClick = () => {
+    this.setState({
+      editMode: false
+    })
+  }
+
+  handleEdit = (id, field, value) => {
+		this.setState(prevState => ({
+      menuItems: prevState.menuItems.map(item =>
+        item.id === id
+        ? {...item, [field]: value}
+        : item
+      )
+    }))
+	}
+
   render() {
+    const viewMode = (
+      <div>
+        <Gallery menuItems={this.state.menuItems}/>
+        <Menu menuItems={this.state.menuItems} />
+      </div>
+    )
+    const editMode = (
+      <MenuEdit
+        menuItems={this.state.menuItems}
+        handleEditMenuDoneClick={this.handleEditMenuDoneClick}
+        handleEdit={this.handleEdit}
+      />
+    )
+
     return (
       <div className="page">
         <Header
@@ -36,8 +72,7 @@ class Page extends Component {
           handleSignOutClick={this.handleSignOutClick}
           handleEditMenuClick={this.handleEditMenuClick}
         />
-        <Gallery />
-        <Menu />
+        {this.state.editMode ? editMode : viewMode}
       </div>
     )
   }

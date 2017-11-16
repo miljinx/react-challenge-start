@@ -1,11 +1,10 @@
 import React from 'react'
 import MenuItem from '../MenuItem'
-import menuItems from '../../menu-data'
 
 
-const Menu = () => {
-	const renderItems = menuItems.map((item, i) =>
-		<MenuItem key={i}
+const Menu = (props) => {
+	const renderItems = props.menuItems.map(item =>
+		<MenuItem key={item.id}
 			title={item.title}
 			description={item.description}
 			price={item.price}

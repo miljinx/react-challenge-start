@@ -1,10 +1,9 @@
 import React from 'react'
 import GalleryItem from '../GalleryItem'
-import menuItems from '../../menu-data'
 
-const Gallery = () => {
-	const renderItems = menuItems.map((item, i) =>
-		<GalleryItem key={i}
+const Gallery = (props) => {
+	const renderItems = props.menuItems.map(item =>
+		<GalleryItem key={item.id}
 			title={item.title}
 			description={item.description}
 			price={item.price}
