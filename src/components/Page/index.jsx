@@ -1,10 +1,12 @@
 import React from 'react'
 import Header from '../Header'
+import Gallery from '../Gallery'
 
 const Page = () => {
   return (
-    <div>
+    <div className="page">
       <Header />
+      <Gallery />
     </div>
   )
 }
