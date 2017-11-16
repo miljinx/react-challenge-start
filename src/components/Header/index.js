@@ -1,9 +1,8 @@
 import React from 'react'
 import image from '../../images/vegies-left.jpg'
 import Nav from '../Nav'
-import Gallery from '../Gallery'
 
-const Header = () => {
+const Header = (props) => {
 	return (
 		<div className="header">
 			<div className="header-left">
@@ -14,7 +13,12 @@ const Header = () => {
 					<h1>Wholesome Foods</h1>
 					<h2>Delicious meals made with locally sourced organic ingredients</h2>
 				</div>
-				<Nav />
+				<Nav
+					signedIn={props.signedIn}
+					handleSignInClick={props.handleSignInClick}
+					handleSignOutClick={props.handleSignOutClick}
+					handleEditMenuClick={props.handleEditMenuClick}
+				/>
 			</div>
 		</div>
 	)
